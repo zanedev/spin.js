@@ -72,7 +72,7 @@ $('#el').spin('flower', 'red');
           $.fn.spin.presets[opts] || opts
         )
         
-        //INVITAE: check parents for proper-z-index value
+        //check parents for proper-z-index value
         //inspired by bootstrap
         var zIndex = parseInt($this.parents().filter(function() {
             return $(this).css('z-index') != 'auto';
