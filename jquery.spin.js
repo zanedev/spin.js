@@ -4,6 +4,11 @@
  */
 
 /*
+  extension of jquery.spin.js to add stacking z-order based on their
+  nearest parent z-index so we can overlay dialogs without them showing through.
+*/
+
+/*
 
 Basic Usage:
 ============
@@ -66,7 +71,14 @@ $('#el').spin('flower', 'red');
           { color: color || $this.css('color') },
           $.fn.spin.presets[opts] || opts
         )
-        data.spinner = new Spinner(opts).spin(this)
+        
+        //INVITAE: check parents for proper-z-index value
+        //inspired by bootstrap
+        var zIndex = parseInt($this.parents().filter(function() {
+            return $(this).css('z-index') != 'auto';
+        }).first().css('z-index'))+10;
+        
+        data.spinner = new Spinner($.extend({"zIndex":zIndex},opts)).spin(this);
       }
     })
   }
